@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Desafio Menu</title>
+    <link href="https://fonts.googleapis.com/css?family=Oswald" rel="stylesheet">
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <style>
+        .menu-toggle { display: none; }
+        .imagemMenor { display: none;}
+        
+        body {
+            background-color: lightgray;
+            width: 100%;
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            background-color: #2e2e2e;
+            width: 100%;
+            height: 80px;
+            display: flex;
+            align-items: center; /* Centraliza verticalmente */            
+            margin: 0;
+            padding: 0;
+        }
+
+        .logo img {
+            width: 87%;
+            height: 60px;
+            display: flex;
+            padding: 0px 15px;
+        }
+
+        .menu {
+            font-family: Oswald;
+            font-size: 20px;
+            position: absolute;
+        }
+
+        ul {
+            display: flex;
+            gap: 10px; /* Espaço entre os itens */
+            list-style: none;
+            padding: 0;
+        }
+
+        li {
+            position: relative;
+            display: inline-block;
+            left: 360px;
+            color: white;
+            height: 80px;
+            width: 80px;
+            text-align: center;
+            align-items: center;
+            justify-content: center;
+        }
+
+        ul li a {
+            color: white;
+            text-decoration: none;
+            position: relative;
+            top: 25px;
+        }
+        
+        ul li:hover {
+            background-color: cornflowerblue;
+        }
+
+        .autenticacao {
+            position: fixed;
+            right: 20px;
+            align-items: end;
+            font-family: Oswald;
+            font-size: 20px;
+            display: flex;
+            gap: 20px;
+        }
+
+        .autenticacao a {
+            color: white;
+            text-decoration: none;
+        }
+
+        .botao {
+            border-radius: 25px;
+            padding: 7px 20px;
+            align-items: center;
+        }
+
+        .destaque {
+            background-color: red;
+        }
+        
+        .botaoLogin {
+            padding: 7px 0px;
+        }
+
+        @media (max-width: 870px) {
+            .menu ul { display: none; }
+            .autenticacao { right: 100px; }
+            .menu-toggle {
+                display: block;
+                position: relative;
+                background: none;
+                border: none;
+                color: white;
+                font-size: 24px;
+                cursor: pointer;
+                position: absolute;
+                right: 20px;
+                top: 25px;
+            }
+            .menu ul.active {
+                display: flex; /* Mostra a lista quando ativa */
+                flex-direction: column; /* Itens empilhados */
+                gap: 10px;
+                align-items: center;
+                position: absolute;
+                top: 20px;
+                width: 90px;
+                background-color: #a9a9a9;
+                border: solid 3px #2e2e2e ;
+            }
+            li {
+                left: 0px;
+                width: 90px;
+            }
+
+            @media (max-width: 600px) {
+                .logo { display: none; }
+                .imagemMenor{
+                    height: 60px;
+                    display: flex;
+                    padding: 0px 15px;
+                }
+            }
+        }
+
+        li.selected {
+            background-color: #3498db;
+        }
+
+        li.selected a {
+            color: black;
+        }
+    </style>
+</head>
+
+<body>
+    <header class="cabecalho">
+        <div class="logo">
+            <a href="#inicio">
+                <img src="http://files.cod3r.com.br/curso-web/logo.png" alt="Logo" />
+            </a>
+        </div>
+        <img src="http://files.cod3r.com.br/curso-web/logo-estreita.png" class="imagemMenor">
+        <button class="menu-toggle">
+            <i class="fa fa-lg fa-bars"></i>
+        </button>
+        <nav class="menu">
+            <ul>
+                <li>
+                    <a href="#inicio">Início</a>
+                </li>
+                <li>
+                    <a href="#cursos">Cursos</a>
+                </li>
+                <li>
+                    <a href="#sobre">Sobre</a>
+                </li>
+                <li>
+                    <a href="#contato">Contato</a>
+                </li>
+            </ul>
+        </nav>
+        <aside class="autenticacao">
+            <a href="#login" class="botaoLogin">Login</a>
+            <a href="#registar" class="botao destaque">Registrar</a>
+        </aside>
+    </header>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const menuToggle = document.querySelector(".menu-toggle")
+            const menu = document.querySelector(".menu ul")
+
+            menuToggle.addEventListener("click", function() {
+                menu.classList.toggle("active")
+            })
+        })
+
+        document.querySelectorAll("li").forEach(li => {
+            li.addEventListener("mouseover", () => {
+                const link = li.querySelector("a");
+                if (link) {
+                    link.style.color = "black"; // Define a cor preta ao passar o mouse
+                }
+            });
+
+            li.addEventListener("mouseout", () => {
+                const link = li.querySelector("a");
+                if (link) {
+                    link.style.color = ""; // Volta à cor padrão quando o mouse sai
+                }
+            });
+        });
+
+        document.querySelectorAll("li").forEach(item => {
+            item.addEventListener("click", () => {
+                document.querySelectorAll("li").forEach(el => el.classList.remove("selected"));
+                item.classList.add("selected");
+            });
+        });
+    </script>
+</body>
+
+</html>
